@@ -67,7 +67,7 @@ def heatmap(data: pd.DataFrame, method: str, metric: str):
     n_rows, n_cols = data.shape
 
     row_dism = 1 - data.T.corr()
-    row_linkage = hc.linkage(sp.distance.squareform(row_dism), method=method)
+    row_linkage = hc.linkage(row_dism, method=method)
 
     return sns.clustermap(data=data,
                           method=method,
