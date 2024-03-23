@@ -37,27 +37,25 @@ class PathwayDatabase:
     def search(self, query: str) -> List[str]:
         return [pathway for pathway in self.pathways if query in pathway]
 
+    def get_clusters(self, clusters: str, highlight: str) -> pd.DataFrame:
+        files = os.listdir('./pathway_analysis/data/{self.organ}/diff_genes/')
 
-def get_clusters(clusters: str, highlight: str) -> pd.DataFrame:
-    files = os.listdir('./pathway_analysis/data/{self.organ}/diff_genes/')
+        raw_diff_genes = []
+        for cluster in files:
+            if highlight == 'z-score':
+                raw_diff_genes.append(pd.read_csv(f'./pathway_analysis/data/{self.organ}/diff_genes/{cluster}', 
+                                                index_col=0).iloc[:, 0].rename(f'{cluster.split('_')[0]}'))
+            else:
+                raw_diff_genes.append(pd.read_csv(f'./pathway_analysis/data/{self.organ}/diff_genes/{cluster}', 
+                                                index_col=0).iloc[:, 1].rename(f'{cluster.split('_')[0]}'))
 
-    diff_genes = []
-    for cluster in files:
-        if highlight == 'z-score':
-            raw_diff_genes.append(pd.read_csv(f'./pathway_analysis/data/{self.organ}/diff_genes/{cluster}', 
-                                              index_col=0).iloc[:, 0].rename(f'{cluster.split('_')[0]}'))
-        else:
-            raw_diff_genes.append(pd.read_csv(f'./pathway_analysis/data/{self.organ}/diff_genes/{cluster}', 
-                                              index_col=0).iloc[:, 1].rename(f'{cluster.split('_')[0]}'))
+        self.diff_genes = pd.concat(raw_diff_genes)
 
-    self.diff_genes = pd.concat(raw_diff_genes)
+        if clusters != 'all':
+            clusters = clusters.split()
+            self.diff_genes = self.diff_genes.loc[clusters]
 
-    if clusters != 'all':
-        clusters = clusters.split()
-        self.diff_genes = self.diff_genes.loc[clusters]
-
-    return self.diff_genes
-
+        return self.diff_genes
 
 
 def heatmap(data: pd.DataFrame, method: str, metric: str):
