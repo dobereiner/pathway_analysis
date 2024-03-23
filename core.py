@@ -4,7 +4,6 @@ import os
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import scipy.spatial as sp, scipy.cluster.hierarchy as hc
 
 class PathwayDatabase:
     DATABASES = {
@@ -50,7 +49,7 @@ class PathwayDatabase:
                 raw_diff_genes.append(pd.read_csv(f'./pathway_analysis/data/{self.organ}/diff_genes/{cluster}', 
                                                 index_col=0).iloc[:, 1].rename(f'{cluster.split("_")[0]}'))
 
-        self.diff_genes = pd.concat(raw_diff_genes, axis=1)
+        self.diff_genes = pd.concat(raw_diff_genes, axis=1, join='inner')
 
         if clusters != 'all':
             clusters = clusters.split()
@@ -64,10 +63,7 @@ class PathwayDatabase:
 
 def heatmap(data: pd.DataFrame, method: str, metric: str):
     n_rows, n_cols = data.shape
-    data = data.applymap(np.nan_to_num)
-
-    row_dism = 1 - data.T.corr()
-    row_linkage = hc.linkage(row_dism, method=method)    
+    # data = data.applymap(np.nan_to_num)    
 
     return sns.clustermap(data=data,
                           method=method,
@@ -76,5 +72,4 @@ def heatmap(data: pd.DataFrame, method: str, metric: str):
                           cmap='bwr',
                           center=0,
                           fmt='',
-                          col_cluster=False,
-                          row_linkage=row_linkage)
+                          col_cluster=False)
