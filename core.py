@@ -4,6 +4,7 @@ import os
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import scipy.spatial as sp, scipy.cluster.hierarchy as hc
 
 class PathwayDatabase:
     DATABASES = {
@@ -63,7 +64,10 @@ class PathwayDatabase:
 
 def heatmap(data: pd.DataFrame, method: str, metric: str):
     n_rows, n_cols = data.shape
-    data = data.applymap(np.nan_to_num)    
+    data = data.applymap(np.nan_to_num)
+
+    row_dism = 1 - data.T.corr()
+    row_linkage = hc.linkage(sp.distance.squareform(row_dism), method=method)    
 
     return sns.clustermap(data=data,
                           method=method,
@@ -72,4 +76,5 @@ def heatmap(data: pd.DataFrame, method: str, metric: str):
                           cmap='bwr',
                           center=0,
                           fmt='',
-                          col_cluster=False)
+                          col_cluster=False,
+                          row_linkage=row_linkage)
