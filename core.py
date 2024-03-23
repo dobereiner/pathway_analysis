@@ -1,11 +1,9 @@
 from typing import List
 
 import os
+import numpy as np
 import pandas as pd
 import seaborn as sns
-
-import scipy.spatial as sp, scipy.cluster.hierarchy as hc
-
 
 class PathwayDatabase:
     DATABASES = {
@@ -65,9 +63,7 @@ class PathwayDatabase:
 
 def heatmap(data: pd.DataFrame, method: str, metric: str):
     n_rows, n_cols = data.shape
-
-    row_dism = 1 - data.T.corr()
-    row_linkage = hc.linkage(row_dism, method=method)
+    data = data.applymap(np.nan_to_num)    
 
     return sns.clustermap(data=data,
                           method=method,
@@ -76,5 +72,4 @@ def heatmap(data: pd.DataFrame, method: str, metric: str):
                           cmap='bwr',
                           center=0,
                           fmt='',
-                          col_cluster=False,
-                          row_linkage=row_linkage)
+                          col_cluster=False)
