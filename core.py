@@ -49,7 +49,7 @@ class PathwayDatabase:
                 raw_diff_genes.append(pd.read_csv(f'./pathway_analysis/data/{self.organ}/diff_genes/{cluster}', 
                                                 index_col=0).iloc[:, 1].rename(f'{cluster.split("_")[0]}'))
 
-        self.diff_genes = pd.concat(raw_diff_genes)
+        self.diff_genes = pd.concat(raw_diff_genes, axis=1)
 
         if clusters != 'all':
             clusters = clusters.split()
