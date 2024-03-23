@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from typing import Tuple
 
-LRDB = pd.read_csv('./biopathways/ligand_receptor/human_lr_pair.txt', sep='\t')
+LRDB = pd.read_csv('./pathway_analysis/ligand_receptor/human_lr_pair.txt', sep='\t')
 
 LIGANDS = LRDB['ligand_gene_symbol'].unique()
 RECEPTORS = LRDB['receptor_gene_symbol'].unique()
