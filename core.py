@@ -38,7 +38,7 @@ class PathwayDatabase:
         return [pathway for pathway in self.pathways if query in pathway]
 
     def get_clusters(self, clusters: str, highlight: str) -> pd.DataFrame:
-        files = os.listdir('./pathway_analysis/data/{self.organ}/diff_genes/')
+        files = os.listdir(f'./pathway_analysis/data/{self.organ}/diff_genes/')
 
         raw_diff_genes = []
         for cluster in files:
