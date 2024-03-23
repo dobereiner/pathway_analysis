@@ -20,7 +20,7 @@ class PathwayDatabase:
         self.organ = organ
         
         if database != 'custom':
-            with open(f'./pathway_analysis/databases/{self.DATABASES[database][0]}') as file:
+            with open(f'./pathway_analysis/data/databases/{self.DATABASES[database][0]}') as file:
                 for line in file:
                     pathway, _, *genes = line.removesuffix('\n').split('\t')
                     self.pathways[pathway] = genes
