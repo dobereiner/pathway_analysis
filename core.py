@@ -54,12 +54,12 @@ class PathwayDatabase:
         if clusters != 'all':
             clusters = clusters.split()
             self.diff_genes = self.diff_genes[clusters]
-            self.diff_genes.replace([np.inf, -np.inf], np.nan, inplace=True)
-            self.diff_genes.dropna(inplace=True, how='all')
-            self.diff_genes.fillna(value=0, inplace=True)
 
         self.diff_genes.columns = self.diff_genes.columns.astype('int32')
         self.diff_genes = self.diff_genes.reindex(sorted(self.diff_genes.columns), axis=1)
+        self.diff_genes.replace([np.inf, -np.inf], np.nan, inplace=True)
+        self.diff_genes.dropna(inplace=True, how='all')
+        self.diff_genes.fillna(value=0, inplace=True)
 
         return self.diff_genes
 
