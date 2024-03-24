@@ -27,8 +27,7 @@ class PathwayDatabase:
                     self.pathways[pathway] = genes
         else:
             self.pathways[pathway] = genes
-
-        self.data = pd.read_csv(f'./pathway_analysis/data/{self.organ}/{self.DATABASES[database][1]}', index_col=0)
+            self.data = pd.read_csv(f'./pathway_analysis/data/{self.organ}/{self.DATABASES[database][1]}', index_col=0)
 
     def __getitem__(self, pathway: str) -> List[str]:
         if pathway in self.pathways:
