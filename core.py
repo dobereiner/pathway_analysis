@@ -77,7 +77,7 @@ def heatmap(data: pd.DataFrame, method: str, metric: str, type: Tuple['pathways'
     return sns.clustermap(data=data,
                           method=method,
                           metric=metric,
-                          figsize=(n_cols * 2, n_rows * 0.5),
+                          figsize=(n_cols * 4, n_rows * 0.5),
                           cmap='bwr',
                           center=0,
                           fmt='',
