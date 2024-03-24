@@ -25,9 +25,11 @@ class PathwayDatabase:
                 for line in file:
                     pathway, _, *genes = line.removesuffix('\n').split('\t')
                     self.pathways[pathway] = genes
+            
+            self.data = pd.read_csv(f'./pathway_analysis/data/{self.organ}/{self.DATABASES[database][1]}', index_col=0)
+            
         else:
             self.pathways[pathway] = genes
-            self.data = pd.read_csv(f'./pathway_analysis/data/{self.organ}/{self.DATABASES[database][1]}', index_col=0)
 
     def __getitem__(self, pathway: str) -> List[str]:
         if pathway in self.pathways:
