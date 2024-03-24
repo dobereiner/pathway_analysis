@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 import os
 import numpy as np
@@ -63,8 +63,9 @@ class PathwayDatabase:
         return self.diff_genes
 
 
-def heatmap(data: pd.DataFrame, method: str, metric: str):
+def heatmap(data: pd.DataFrame, method: str, metric: str, type: Tuple['pathways', 'genes']):
     n_rows, n_cols = data.shape   
+    z_score = 0 if type == 'pathways' else None
 
     return sns.clustermap(data=data,
                           method=method,
@@ -73,5 +74,5 @@ def heatmap(data: pd.DataFrame, method: str, metric: str):
                           cmap='bwr',
                           center=0,
                           fmt='',
-                          z_score=0,
+                          z_score=z_score,
                           col_cluster=False)
