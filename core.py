@@ -73,4 +73,5 @@ def heatmap(data: pd.DataFrame, method: str, metric: str):
                           cmap='bwr',
                           center=0,
                           fmt='',
+                          z_score=0,
                           col_cluster=False)
