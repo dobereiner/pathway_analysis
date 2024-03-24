@@ -54,6 +54,7 @@ class PathwayDatabase:
         if clusters != 'all':
             clusters = clusters.split()
             self.diff_genes = self.diff_genes[clusters]
+            self.diff_genes.dropna(inplace=True)
 
         self.diff_genes.columns = self.diff_genes.columns.astype('int32')
         self.diff_genes = self.diff_genes.reindex(sorted(self.diff_genes.columns), axis=1)
@@ -62,8 +63,7 @@ class PathwayDatabase:
 
 
 def heatmap(data: pd.DataFrame, method: str, metric: str):
-    n_rows, n_cols = data.shape
-    data = data.applymap(np.nan_to_num)    
+    n_rows, n_cols = data.shape   
 
     return sns.clustermap(data=data,
                           method=method,
