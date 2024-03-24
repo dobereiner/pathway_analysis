@@ -11,6 +11,11 @@ class PathwayDatabase:
         'canonical pathways': ['c2.cp.v2023.2.Hs.symbols.gmt', 'cp.csv'],
         'reactome': ['c2.cp.reactome.v2023.2.Hs.symbols.gmt', 'reactome.csv'],
         'transcription factor targets': ['c3.tft.v2023.2.Hs.symbols.gmt', 'tf.csv'],
+        'biocarta': ['c2.cp.biocarta.v2023.2.Hs.symbols.gmt', 'biocarta.csv'],
+        'kegg_legacy': ['c2.cp.kegg_legacy.v2023.2.Hs.symbols.gmt', 'kegg_legacy.csv'],
+        'kegg_medicus': ['c2.cp.kegg_medicus.v2023.2.Hs.symbols.gmt', 'kegg_medicus.csv'],
+        'pid': ['c2.cp.pid.v2023.2.Hs.symbols.gmt', 'pid.csv'], 
+        'wikipathways': ['c2.cp.wikipathways.v2023.2.Hs.symbols.gmt', 'wikipathways.csv'],
         'GOBP': ['c5.go.bp.v2023.2.Hs.symbols.gmt', 'go_bp.csv'],
         'GOCC': ['c5.go.cc.v2023.2.Hs.symbols.gmt', 'go_cc.csv'],
         'GOMF': ['c5.go.mf.v2023.2.Hs.symbols.gmt', 'go_mf.csv']
