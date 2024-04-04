@@ -82,4 +82,5 @@ def heatmap(data: pd.DataFrame, method: str, metric: str, type: Tuple['pathways'
                           center=0,
                           fmt='',
                           z_score=z_score,
-                          col_cluster=False)
+                          col_cluster=False,
+                          cbar_pos=(0, .2, .03, .4))
